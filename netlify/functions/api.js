@@ -133,35 +133,6 @@ async function getShopeeShortLink(originalUrl, subIds = []) {
         return response.data.data?.generateShortLink?.shortLink || null;
     } catch (e) { return null; }
 }
-// Cập nhật hàm getProductInfo trong api.js
-async function getProductInfo(itemId) {
-    if (!itemId) return null;
-    const timestamp = Math.floor(Date.now() / 1000);
-    // Bổ sung các trường dữ liệu mới vào Query
-    const query = `query { 
-        productOfferV2(itemId: ${itemId}) { 
-            nodes { 
-                productName 
-                imageUrl 
-                priceMin 
-                priceDiscountRate 
-                ratingStar 
-            } 
-        } 
-    }`;
-    const payloadString = JSON.stringify({ query });
-    const signature = crypto.createHash('sha256').update(`${APP_ID}${timestamp}${payloadString}${APP_SECRET}`).digest('hex');
-
-    try {
-        const response = await axios.post(SHOPEE_API_URL, payloadString, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `SHA256 Credential=${APP_ID}, Timestamp=${timestamp}, Signature=${signature}`
-            }
-        });
-        return response.data.data?.productOfferV2?.nodes?.[0] || null;
-    } catch (e) { return null; }
-}
 
 // --- ROUTER XỬ LÝ CHÍNH ---
 router.post('/convert-text', async (req, res) => {
