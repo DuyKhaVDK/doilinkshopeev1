@@ -206,7 +206,7 @@
                 const response = await fetch('/api/convert-text', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ text: input, subIds: ["DK"] }) 
+                    body: JSON.stringify({ text: input, subIds: ["webdoilink"] }) 
                 });
                 const data = await response.json();
 
