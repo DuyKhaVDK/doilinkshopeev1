@@ -112,7 +112,7 @@ async function getShopeeShortLink(originalUrl, subIds = []) {
     const timestamp = Math.floor(Date.now() / 1000);
     
     // Xử lý Sub IDs: Ưu tiên subId truyền vào, mặc định là webchuyendoi
-    let finalSubIds = ["webchuyendoi"]; 
+    let finalSubIds = ["webdoilink"]; 
     if (subIds && subIds.length > 0) {
         const validIds = subIds.filter(id => id && id.trim() !== "");
         if (validIds.length > 0) finalSubIds = validIds.map(id => id.trim());
